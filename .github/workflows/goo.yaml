@@ -31,7 +31,7 @@ jobs:
 
     steps:
       - name: Deploy to GitHub Pages
-        uses: SiwakornEDZ/go-k8s-cicds@4.1.1
+        uses: SiwakornEDZ/go-k8s-cicds@v2
         with:
           branch: cicd
           folder: .
