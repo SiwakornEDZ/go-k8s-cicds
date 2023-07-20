@@ -1,95 +1,47 @@
 package config
 
-import (
-	"embed"
-	"flag"
-	"fmt"
-	"os"
-
-	"github.com/ybkuroki/go-webapp-sample/util"
-	"gopkg.in/yaml.v3"
-)
-
-// Config represents the composition of yml settings.
-type Config struct {
-	Database struct {
-		Dialect   string `default:"sqlite3"`
-		Host      string `default:"book.db"`
-		Port      string
-		Dbname    string
-		Username  string
-		Password  string
-		Migration bool `default:"false"`
-	}
-	Redis struct {
-		Enabled            bool `default:"false"`
-		ConnectionPoolSize int  `yaml:"connection_pool_size" default:"10"`
-		Host               string
-		Port               string
-	}
-	Extension struct {
-		MasterGenerator bool `yaml:"master_generator" default:"false"`
-		CorsEnabled     bool `yaml:"cors_enabled" default:"false"`
-		SecurityEnabled bool `yaml:"security_enabled" default:"false"`
-	}
-	Log struct {
-		RequestLogFormat string `yaml:"request_log_format" default:"${remote_ip} ${account_name} ${uri} ${method} ${status}"`
-	}
-	StaticContents struct {
-		Enabled bool `default:"false"`
-	}
-	Swagger struct {
-		Enabled bool `default:"false"`
-		Path    string
-	}
-	Security struct {
-		AuthPath    []string `yaml:"auth_path"`
-		ExculdePath []string `yaml:"exclude_path"`
-		UserPath    []string `yaml:"user_path"`
-		AdminPath   []string `yaml:"admin_path"`
-	}
-}
+// ErrExitStatus represents the error status in this application.
+const ErrExitStatus int = 2
 
 const (
-	// DEV represents development environment
-	DEV = "develop"
-	// PRD represents production environment
-	PRD = "production"
-	// DOC represents docker container
-	DOC = "docker"
+	// AppConfigPath is the path of application.yml.
+	AppConfigPath = "resources/config/application.%s.yml"
+	// MessagesConfigPath is the path of messages.properties.
+	MessagesConfigPath = "resources/config/messages.properties"
+	// LoggerConfigPath is the path of zaplogger.yml.
+	LoggerConfigPath = "resources/config/zaplogger.%s.yml"
 )
 
-// LoadAppConfig reads the settings written to the yml file
-func LoadAppConfig(yamlFile embed.FS) (*Config, string) {
-	var env *string
-	if value := os.Getenv("WEB_APP_ENV"); value != "" {
-		env = &value
-	} else {
-		env = flag.String("env", "develop", "To switch configurations.")
-		flag.Parse()
-	}
+// PasswordHashCost is hash cost for a password.
+const PasswordHashCost int = 10
 
-	file, err := yamlFile.ReadFile(fmt.Sprintf(AppConfigPath, *env))
-	if err != nil {
-		fmt.Printf("Failed to read application.%s.yml: %s", *env, err)
-		os.Exit(ErrExitStatus)
-	}
+const (
+	// API represents the group of API.
+	API = "/api"
+	// APIBooks represents the group of book management API.
+	APIBooks = API + "/books"
+	// APIBooksID represents the API to get book data using id.
+	APIBooksID = APIBooks + "/:id"
+	// APICategories represents the group of category management API.
+	APICategories = API + "/categories"
+	// APIFormats represents the group of format management API.
+	APIFormats = API + "/formats"
+)
 
-	config := &Config{}
-	if err := yaml.Unmarshal(file, config); err != nil {
-		fmt.Printf("Failed to read application.%s.yml: %s", *env, err)
-		os.Exit(ErrExitStatus)
-	}
+const (
+	// APIAccount represents the group of auth management API.
+	APIAccount = API + "/auth"
+	// APIAccountLoginStatus represents the API to get the status of logged in account.
+	APIAccountLoginStatus = APIAccount + "/loginStatus"
+	// APIAccountLoginAccount represents the API to get the logged in account.
+	APIAccountLoginAccount = APIAccount + "/loginAccount"
+	// APIAccountLogin represents the API to login by session authentication.
+	APIAccountLogin = APIAccount + "/login"
+	// APIAccountLogout represents the API to logout.
+	APIAccountLogout = APIAccount + "/logout"
+)
 
-	return config, *env
-}
-
-// LoadMessagesConfig loads the messages.properties.
-func LoadMessagesConfig(propsFile embed.FS) map[string]string {
-	messages := util.ReadPropertiesFile(propsFile, MessagesConfigPath)
-	if messages == nil {
-		fmt.Printf("Failed to load the messages.properties.")
-		os.Exit(ErrExitStatus)
-	}
-	return messages
-}
+const (
+	// APIHealth represents the API to get the status of this application.
+	APIHealth = API + "/health"
+)

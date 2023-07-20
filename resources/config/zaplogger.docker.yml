@@ -1,5 +1,5 @@
 zap_config: 
-  level: "debug"
+  level: "info"
   encoding: "console"
   development: true
   encoderConfig:
@@ -15,8 +15,10 @@ zap_config:
     callerEncoder: "short"
   outputPaths:
     - "stdout"
+    - "./application.log"
   errorOutputPaths:
-    - "stdout"
+    - "stderr"
+    - "./error.log"
 
 log_rotate:
   maxsize: 3
