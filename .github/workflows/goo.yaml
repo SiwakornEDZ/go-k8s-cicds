@@ -11,10 +11,10 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v2
+        uses: SiwakornEDZ/go-k8s-cicds@cicd
 
       - name: Setup Go
-        uses: actions/setup-go@v2
+        uses: SiwakornEDZ/go-k8s-cicds@cicd
         with:
           go-version: '1.20'
 
@@ -31,7 +31,7 @@ jobs:
 
     steps:
       - name: Deploy to GitHub Pages
-        uses: SiwakornEDZ/go-k8s-cicds@lastest
+        uses: SiwakornEDZ/go-k8s-cicds@cicd
         with:
           branch: cicd
           folder: .
