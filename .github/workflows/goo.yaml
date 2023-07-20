@@ -14,7 +14,7 @@ jobs:
         uses: ybkuroki/go-webapp-sample@latest
 
       - name: Setup Go
-        uses: ybkuroki/go-webapp-sample@latest
+        uses: actions/setup-go@v4
         with:
           go-version: '1.20'
 
