@@ -11,10 +11,10 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: SiwakornEDZ/go-k8s-cicds@cicd
+        uses: ybkuroki/go-webapp-sample@latest
 
       - name: Setup Go
-        uses: SiwakornEDZ/go-k8s-cicds@cicd
+        uses: ybkuroki/go-webapp-sample@latest
         with:
           go-version: '1.20'
 
@@ -31,9 +31,9 @@ jobs:
 
     steps:
       - name: Deploy to GitHub Pages
-        uses: SiwakornEDZ/go-k8s-cicds@cicd
+        uses: ybkuroki/go-webapp-sample@latest
         with:
-          branch: cicd
+          branch: latest
           folder: .
           clean: true 
           token: ${{ secrets.GITHUB_TOKEN }}
