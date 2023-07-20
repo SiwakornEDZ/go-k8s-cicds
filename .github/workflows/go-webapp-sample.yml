@@ -25,3 +25,4 @@ jobs:
           go mod init github.com/ybkuroki/go-webapp-sample/latest
           go mod tidy
           go build main.go
+          http server started on [::]:8080
