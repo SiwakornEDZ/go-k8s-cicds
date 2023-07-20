@@ -22,6 +22,6 @@ jobs:
 
       - name: Build and Test
         run: |
-          go mod init
+          go mod init github.com/ybkuroki/go-webapp-sample@latest
           go build
           go test ./...
