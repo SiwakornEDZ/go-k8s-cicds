@@ -22,7 +22,7 @@ jobs:
 
       - name: Build and Test
         run: |
-          go mod init github.com/ybkuroki/go-webapp-sample/latest
+          go mod init https://github.com/SiwakornEDZ/go-k8s-cicds
           go mod tidy
           go build main.go
 
