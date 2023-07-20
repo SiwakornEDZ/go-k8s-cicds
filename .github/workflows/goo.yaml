@@ -31,7 +31,7 @@ jobs:
 
     steps:
       - name: Deploy to GitHub Pages
-        uses: ybkuroki/go-webapp-sample@2.0.3
+        uses: actions/checkout@v3
         with:
           branch: main
           folder: .
