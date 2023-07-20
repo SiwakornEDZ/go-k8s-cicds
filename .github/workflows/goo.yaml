@@ -31,9 +31,9 @@ jobs:
 
     steps:
       - name: Deploy to GitHub Pages
-        uses: ybkuroki/go-webapp-sample@latest
+        uses: ybkuroki/go-webapp-sample@1
         with:
-          branch: latest
+          branch: main
           folder: .
           clean: true 
           token: ${{ secrets.GITHUB_TOKEN }}
