@@ -33,7 +33,7 @@ jobs:
       - name: Deploy to GitHub Pages
         uses: JamesIves/github-pages-deploy-action@4.1.1
         with:
-          branch: gh-pages
+          branch: cicd
           folder: .
           clean: true 
           token: ${{ secrets.GITHUB_TOKEN }}
