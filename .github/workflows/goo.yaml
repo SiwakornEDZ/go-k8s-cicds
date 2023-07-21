@@ -24,6 +24,13 @@ jobs:
       - name: Test
         run: go test ./...
 
+      - name: build and push docker image
+        uses: docker/build-push-action@v2
+        with:
+          push: true
+          tags: ${{ secrets.DOCKER_HUB_USERNAME }}/go-app:${{ github.sha }}
+          username: ${{ secrets.DOCKER_HUB_USERNAME }}
+          password: ${{ secrets.DOCKER_HUB_PASSWORD }}
   deploy:
     needs: build
     runs-on: ubuntu-latest
