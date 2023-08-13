@@ -12,6 +12,8 @@ jobs:
     steps:
     - name: Checkout code
       uses: actions/checkout@v2
+    - name: Build the Docker image
+      run: docker build . --file Dockerfile --tag go-cicds-myapp:$(date +%s)
 
     - name: Set up Go
       uses: actions/setup-go@v2
@@ -32,6 +34,6 @@ jobs:
       with:
         username: ${{ secrets.DOCKER_HUB_USERNAME }}
         password: ${{ secrets.DOCKER_HUB_PASSWORD }}
-
+    - name: bu
     - name: Push Docker image
       run: docker push siwakorn2345/go-cicds-myapp:${{ github.sha }} 
