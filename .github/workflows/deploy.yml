@@ -34,4 +34,4 @@ jobs:
         password: ${{ secrets.DOCKER_HUB_PASSWORD }}
 
     - name: Push Docker image
-      run: docker push siwakorn2345/go-cicds:${{ github.sha }} 
+      run: docker push siwakorn2345/go-cicds-myapp:${{ github.sha }} 
