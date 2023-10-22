@@ -1,7 +1,7 @@
 pipeline {
     agent { label 'Jenkins-Agent' }
     tools {
-        jdk 'Go1.21.3'
+        go 'Go1.21.3'
         maven 'Maven3'
     }
     environment {
