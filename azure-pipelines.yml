@@ -19,5 +19,5 @@ steps:
 - task: Go@0
   inputs:
     command: 'build'
-    workingDirectory: '''$(Build.ArtifactStagingDirectory)/main'''
+    workingDirectory: '$(Build.ArtifactStagingDirectory)/main'
 
