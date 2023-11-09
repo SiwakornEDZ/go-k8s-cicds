@@ -15,7 +15,7 @@ steps:
     ArtifactName: 'drop'
 - task: GoTool@0
   inputs:
-    version: 'latest'
+    version: '1.20'
 - script: ls -R /opt/hostedtoolcache/go
 - task: Go@0
   inputs:
